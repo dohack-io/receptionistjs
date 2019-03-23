@@ -94,9 +94,6 @@ export class EventService {
     attendee: RegistrationModel,
     attendees: RegistrationModel[],
   ) {
-    attendee.id = uniqid('attendee-');
-    attendee.hasAttended = false;
-    attendees.push(attendee);
     const params = {
       TableName: this.table,
       Key: {
