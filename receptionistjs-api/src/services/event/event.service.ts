@@ -67,6 +67,7 @@ export class EventService {
       type: event.type,
       description: event.description,
       location: event.location,
+      contactPerson: event.contactPerson,
       attendees: event.attendees || [],
     };
     const params = {

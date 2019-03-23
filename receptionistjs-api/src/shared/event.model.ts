@@ -6,5 +6,6 @@ export interface EventModel {
     type: string;
     location: string;
     description: string;
+    contactPerson: string;
     attendees: RegistrationModel[];
 }

@@ -8,15 +8,18 @@ export class EventsController {
   constructor(private eventService: EventService) {}
 
   @Post()
-  @Header('Access-Control-Allow-Origin', '*')
   public async onCreateEvent(@Body() event: EventModel) {
     await this.eventService.createEvent(event);
   }
 
   @Get()
-  @Header('Access-Control-Allow-Origin', '*')
   public onReadEvents() {
     return this.eventService.readEvents();
+  }
+
+  @Get(':id')
+  public onReadRegistrations(@Param('id') id) {
+    return this.eventService.readEvent(id);
   }
 
   @Post(':id/register')
