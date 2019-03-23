@@ -26,9 +26,7 @@ app.setHandler({
     },
 
     MyNameIsIntent() {
-        console.log(this.$inputs.personName);
         const name = this.$inputs.personName.value.split(' ');
-        console.log(name);
         this.$user.$data.firstName = name[0];
         this.$user.$data.lastName = name[1];
         this.ask(
@@ -78,9 +76,12 @@ app.setHandler({
 
     async EventIntent() {
         const events = await getEvents();
+        console.log('EVENTNAME:');
+        console.log(this.$inputs.eventName);
         let foundEvent = events.filter(event =>
-            event.name.includes(this.$inputs.eventName.value)
+            event.name.toLowerCase().includes(this.$inputs.eventName.value.toLowerCase())
         )[0];
+        console.log('FOUND EVENT: ' + foundEvent);
         if (foundEvent) {
             if (await validateAttendee.call(this, foundEvent.id)) {
                 switch (foundEvent.type) {
