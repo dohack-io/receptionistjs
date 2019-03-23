@@ -26,13 +26,16 @@ app.setHandler({
     },
 
     MyNameIsIntent() {
-        this.$user.$data.firstName = this.$inputs.firstName.value;
-        this.$user.$data.lastName = this.$inputs.lastName.value;
+        console.log(this.$inputs.personName);
+        const name = this.$inputs.personName.value.split(' ');
+        console.log(name);
+        this.$user.$data.firstName = name[0];
+        this.$user.$data.lastName = name[1];
         this.ask(
             'Hello ' +
-                this.$inputs.firstname.value +
+                name[0] +
                 ' ' +
-                this.$inputs.lastname.value +
+                name[1] +
                 '. What Event do you wish to attend?',
             'Please tell me the event you wish to attend'
         );
