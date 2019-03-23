@@ -1,0 +1,17 @@
+[
+  {
+    "id": "1",
+    "name": "DOHACKJS",
+    "type": "conference",
+    "location": "Hackerarea #1",
+    "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et"
+  },
+  {
+    "id": "5",
+    "name": "Wrestlecon",
+    "type": "conference",
+    "location": "big hall",
+    "description": "A Super Convention for Wrestling"
+
+  }
+]

@@ -12,24 +12,6 @@
 		{
 			"name": "MyNameIsIntent",
 			"phrases": [
-				"{name}",
-				"my name is {name}",
-				"i am {name}",
-				"you can call me {name}"
-			],
-			"inputs": [
-				{
-					"name": "name",
-					"type": {
-						"alexa": "AMAZON.US_FIRST_NAME",
-						"dialogflow": "@sys.given-name"
-					}
-				}
-			]
-		},
-		{
-			"name": "AskNameIntent",
-			"phrases": [
 				"{firstname} {lastname}",
 				"my name is {firstname} {lastname}",
 				"i am {firstname} {lastname}",
@@ -75,6 +57,23 @@
 					}
 
 				}
+			]
+		},
+		{
+			"name": "YesIntent",
+			"phrases": [
+				"Yes",
+				"yeah",
+				"yup",
+				"positive"
+			]
+		},
+		{
+			"name": "NoIntent",
+			"phrases": [
+				"no",
+				"negative",
+				"nope"
 			]
 		}
 	],
