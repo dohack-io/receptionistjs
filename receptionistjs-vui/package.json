@@ -39,10 +39,10 @@
     "start": "cd dist/src && node index.js --webhook",
     "launch": "npm start -- --launch"
   },
-	"prettier": {
-		"tabWidth": 4,
-		"singleQuote": true
-	},
+  "prettier": {
+    "tabWidth": 4,
+    "singleQuote": true
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jovotech/jovo-sample-voice-app-nodejs.git"

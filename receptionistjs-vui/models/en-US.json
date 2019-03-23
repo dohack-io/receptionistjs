@@ -1,5 +1,5 @@
 {
-	"invocation": "ReceptionistJS",
+	"invocation": "receptionist",
 	"intents": [
 		{
 			"name": "HelloWorldIntent",
@@ -12,23 +12,15 @@
 		{
 			"name": "MyNameIsIntent",
 			"phrases": [
-				"{firstName} {lastName}",
-				"my name is {firstName} {lastName}",
-				"i am {firstName} {lastName}",
-				"you can call me {firstName} {lastName}"
+				"my name is {personName}",
+				"i am {personName}",
+				"you can call me {personName}"
 			],
 			"inputs": [
 				{
-					"name": "firstName",
+					"name": "personName",
 					"type": {
-						"alexa": "AMAZON.US_FIRST_NAME",
-						"dialogflow": "@sys.given-name"
-					}
-				},
-				{
-					"name": "lastName",
-					"type": {
-						"alexa": "AMAZON.US_LAST_NAME",
+						"alexa": "AMAZON.Person",
 						"dialogflow": "@sys.given-name"
 					}
 				}
