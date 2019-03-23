@@ -71,13 +71,14 @@ app.setHandler({
             this.tell("Okay, I am sorry, that I could'nt help you");
         }
     },
+
     async EventIntent() {
         const events = await getEvents();
         let foundEvent = events.filter(event =>
             event.name.includes(this.$inputs.eventName.value)
         )[0];
         if (foundEvent) {
-            if (validateAttendee(foundEvent.id)) {
+            if (await validateAttendee(foundEvent.id)) {
                 switch (foundEvent.type) {
                     case 'conference': {
                         this.tell(
@@ -123,18 +124,22 @@ async function getEvents(): Promise<EventModel[]> {
 
 async function validateAttendee(eventID: string) {
     const options = {
-        uri: `http://localhost:5000/events/${eventID}/registrations`,
-        json: true
+        uri: `http://localhost:5000/${eventID}/validate`,
+        json: true,
+        method: 'POST',
+        resolveWithFullResponse: true,
+        body: {
+            // @ts-ignore
+            firstName: this.$user.$data.firstName,
+            // @ts-ignore
+            lastName: this.$user.$data.lastName
+        }
     };
-    const attendees: AttendeeModel[] = await requestPromise(options);
-    return attendees.filter(attendee => {
-        return (
-            // @ts-ignore
-            attendee.firstName === this.$user.$data.firstName &&
-            // @ts-ignore
-            attendee.lastName === this.$user.$data.lastName
-        );
-    });
+    const response = await requestPromise(options);
+    console.log('-----------------');
+    console.log(response);
+    console.log('-----------------');
+    return response.statusCode === 200
 }
 
 module.exports.app = app;
