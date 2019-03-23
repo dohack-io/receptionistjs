@@ -68,7 +68,6 @@ app.setHandler({
             if (validateAttendee(foundEvent.id)) {
                 this.tell('Great, I was able to find you in my notes. ');
             }
-            this.tell('Okay, ' + this.$inputs.eventName.value + '. Give me a second, while I look for you in my files.');
         } else {
             let speech = 'Sorry, I could not find the your Event. Do you want me to tell you, which Events are available?';
             this.followUpState('EventState').ask(speech, 'Please answer with yes or no.')
