@@ -8,7 +8,13 @@ import { HttpClient } from '@angular/common/http';
 })
 export class EventsPage implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.http.get('https://xkcd.com/info.0.json').toPromise().then((value) => {
+      console.log(value);
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
 
   ngOnInit() {
   }
