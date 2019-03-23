@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { LoadingController, AlertController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-registration',
@@ -14,7 +16,9 @@ export class RegistrationPage implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private http: HttpClient) { }
+              private http: HttpClient,
+              private loadingCtrl: LoadingController,
+              private alertCtrl: AlertController) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -23,10 +27,13 @@ export class RegistrationPage implements OnInit {
     });
   }
 
-  register(form) {
+  async register(form) {
+    const loader = await this.loadingCtrl.create({
+      message: 'Bitte warten...',
+    });
+    await loader.present();
 
     const data = {
-      'id': this.eventId,
       'firstName': form.form.controls.firstName.value,
       'lastName': form.form.controls.lastName.value,
       'eMail': form.form.controls.eMail.value,
@@ -37,14 +44,27 @@ export class RegistrationPage implements OnInit {
       'phoneNumber': form.form.controls.phoneNumber.value,
     };
 
-    this.http.post('http://localhost:3000/events', JSON.stringify(data))
+    console.log(data);
+
+    this.http.post(`http://localhost:5000/events/${this.eventId}/register`, data)
     .toPromise()
     .then((value) => {
       console.log(value);
+      form.reset();
+      this.onAlert('Registrierung erfolgreich');
     })
     .catch((err) => {
       console.log(err);
-    }
-    );
+      this.onAlert('Es trat ein Fehler auf');
+    });
+    await loader.dismiss();
   }
+  async onAlert(message: string) {
+    const alert =  await this.alertCtrl.create({
+      message: message,
+      buttons: ['OK']
+    });
+
+    alert.present();
+   }
 }
