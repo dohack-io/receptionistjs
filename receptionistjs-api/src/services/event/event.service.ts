@@ -113,7 +113,9 @@ export class EventService {
       .promise()
       .then((data) => {
         Logger.log('UpdateItem succeeded:', JSON.stringify(data, null, 2));
-        return data;
+        return {
+          isRegistered: true,
+        };
       })
       .catch(err => {
         Logger.error(
