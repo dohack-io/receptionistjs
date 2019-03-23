@@ -3,10 +3,17 @@
       <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
-    <ion-title>registrated-users</ion-title>
+    <ion-title>Angemeldete Personen</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-title class="side-title">{{eventName}}</ion-title>
+<h2 id="noAttendees" *ngIf="eventAttendees.attendees?.length===0">Es existieren keine Teilnehmer</h2>
+  <ion-card class="bg-modified" *ngFor="let attendee of eventAttendees.attendees">
+    <img class="overlay"/>
+      <div class="card-title">{{ attendee.firstName }} {{ attendee.lastName}}</div>
+      <div class="card-subtitle">{{ attendee.description }}</div>
+  </ion-card>
 
 </ion-content>
