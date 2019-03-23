@@ -20,8 +20,6 @@ export class EventsController {
   }
 
   @Post(':id/register')
-  @Options(':id/register')
-  @Header('Access-Control-Allow-Origin', '*')
   public async  onCreateRegistration(@Param('id') id, @Body() registration: RegistrationModel) {
     const event = await this.eventService.readEvent(id);
     const attendees: RegistrationModel[] = event.attendees;
