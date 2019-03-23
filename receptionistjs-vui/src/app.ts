@@ -87,6 +87,13 @@ app.setHandler({
                         );
                         break;
                     }
+                    case 'appointment': {
+                        this.tell(
+                            'Great, I was able to find you in my notes. ' + foundEvent.contactperson + 
+                            ' has been contacted and is on the way to welcome you'
+                        );
+                        break;
+                    }
                     default: {
                         this.tell(
                             'Great, I was able to find you in my notes. Your Event is held at ' +
@@ -118,6 +125,7 @@ function getEvents() {
             id: '1',
             name: 'DOHACKJS',
             type: 'conference',
+            contactperson: 'Schmidt',
             location: 'Untergeschoss',
             description:
                 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et'
@@ -126,6 +134,15 @@ function getEvents() {
             id: '5',
             name: 'Wrestlecon',
             type: 'conference',
+            contactperson: 'Schmidt',
+            location: 'Große Halle',
+            description: 'A Super Convention for Wrestling'
+        },
+        {
+            id: '5',
+            name: 'Bewerbungsgespraech',
+            type: 'appointment',
+            contactperson: 'Schmidt',
             location: 'Große Halle',
             description: 'A Super Convention for Wrestling'
         }
