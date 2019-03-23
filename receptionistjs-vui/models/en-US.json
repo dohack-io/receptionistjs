@@ -1,5 +1,5 @@
 {
-	"invocation": "my test app",
+	"invocation": "ReceptionistJS",
 	"intents": [
 		{
 			"name": "HelloWorldIntent",
@@ -24,6 +24,56 @@
 						"alexa": "AMAZON.US_FIRST_NAME",
 						"dialogflow": "@sys.given-name"
 					}
+				}
+			]
+		},
+		{
+			"name": "AskNameIntent",
+			"phrases": [
+				"{firstname} {lastname}",
+				"my name is {firstname} {lastname}",
+				"i am {firstname} {lastname}",
+				"you can call me {firstname} {lastname}"
+			],
+			"inputs": [
+				{
+					"name": "firstname",
+					"type": {
+						"alexa": "AMAZON.US_FIRST_NAME",
+						"dialogflow": "@sys.given-name"
+					}
+				},
+				{
+					"name": "lastname",
+					"type": {
+						"alexa": "AMAZON.US_LASTNAME_NAME",
+						"dialogflow": "@sys.given-name"
+					}
+				}
+			]
+		},
+		{
+			"name": "WelcomeIntent",
+			"phrases": [
+				"hello",
+				"hi"
+			]
+		},
+		{
+			"name": "EventIntent",
+			"phrases": [
+				"I want to attend {eventName}",
+				"I am here for {eventName}",
+				"{eventName}"
+			],
+			"inputs": [
+				{
+					"name": "eventName",
+					"type": {
+						"alexa": "AMAZON.SearchQuery",
+						"dialogflow": "@sys.any"
+					}
+
 				}
 			]
 		}
