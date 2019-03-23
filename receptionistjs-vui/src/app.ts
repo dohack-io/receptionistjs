@@ -24,7 +24,7 @@ app.use(
 
 app.setHandler({
     LAUNCH() {
-        this.toIntent('HelloWorldIntent');
+        this.toIntent('WelcomeIntent');
     },
 
     HelloWorldIntent() {
@@ -38,6 +38,10 @@ app.setHandler({
     MyNameIsIntent() {
         this.tell('Hey ' + this.$inputs.name.value + ', nice to meet you!');
     },
+
+    WelcomeIntent() {
+        this.ask('Welcome to DOHACKJS, What\'s your name?', 'Please tell me your name?')
+    }
 });
 
 module.exports.app = app;
