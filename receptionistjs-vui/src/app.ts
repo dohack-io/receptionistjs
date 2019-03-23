@@ -8,7 +8,6 @@ import { GoogleAssistant } from 'jovo-platform-googleassistant';
 import { JovoDebugger } from 'jovo-plugin-debugger';
 import { FileDb } from 'jovo-db-filedb';
 import { EventModel } from './EventModel';
-import { AttendeeModel } from './AttendeeModel';
 
 const requestPromise = require('request-promise-native');
 
@@ -152,9 +151,6 @@ async function validateAttendee(eventID: string) {
     const response = await requestPromise(options).catch(() => {
         return { isRegistered: false };
     });
-    console.log('-----------------');
-    console.log(response);
-    console.log('-----------------');
     return response.isRegistered === true;
 }
 
