@@ -31,6 +31,10 @@ app.setHandler({
         this.ask('Hello World! What\'s your name?', 'Please tell me your name.');
     },
 
+    AskNameIntent() {
+        this.tell('Hello ' + this.$inputs.firstname.value + ' ' + this.$inputs.lastname.value + '.');
+    },
+
     MyNameIsIntent() {
         this.tell('Hey ' + this.$inputs.name.value + ', nice to meet you!');
     },
