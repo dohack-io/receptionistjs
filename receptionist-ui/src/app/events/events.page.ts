@@ -9,36 +9,19 @@ import { Router } from '@angular/router';
 })
 export class EventsPage implements OnInit {
 
-  private events = [
-    {
-      'id': '123456789',
-      'name': 'Test Event 1',
-      'description': 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et'
-    },
-    {
-      'id': '123456790',
-      'name': 'Test Event 2',
-      'description': 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et'
-    },
-    {
-      'id': '123456791',
-      'name': 'Test Event 3',
-      'description': 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et'
-    }
-  ];
+  private events: any = [];
 
   constructor(private http: HttpClient,
               private router: Router) {
-
-
-    this.http.get('https://xkcd.com/info.0.json').toPromise().then((value) => {
-      console.log(value);
-    }).catch((err) => {
-      console.log(err);
-    });
   }
 
   ngOnInit() {
+    this.http.get('http://localhost:3000/events').toPromise().then((value) => {
+      console.log(value);
+      this.events = value;
+    }).catch((err) => {
+      console.log(err);
+    });
   }
 
 

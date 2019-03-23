@@ -11,14 +11,11 @@
 
 <ion-content>
 <ion-title class="side-title">{{eventName}}</ion-title>
-
+<div text-center>
+    <p class="registrationTitle">Registriere dich jetzt!<p>
+  </div>
 <form #form="ngForm" (ngSubmit)="register(form)">
   <ion-row justify-content-center>
-    <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-      <div text-center>
-        <p class="registrationTitle">Registriere dich jetzt!<p>
-      </div>
-    </ion-col>
     <div padding>
       <ion-item>
         <ion-label size="5">Name:</ion-label>
