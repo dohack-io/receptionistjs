@@ -12,23 +12,23 @@
 		{
 			"name": "MyNameIsIntent",
 			"phrases": [
-				"{firstname} {lastname}",
-				"my name is {firstname} {lastname}",
-				"i am {firstname} {lastname}",
-				"you can call me {firstname} {lastname}"
+				"{firstName} {lastName}",
+				"my name is {firstName} {lastName}",
+				"i am {firstName} {lastName}",
+				"you can call me {firstName} {lastName}"
 			],
 			"inputs": [
 				{
-					"name": "firstname",
+					"name": "firstName",
 					"type": {
 						"alexa": "AMAZON.US_FIRST_NAME",
 						"dialogflow": "@sys.given-name"
 					}
 				},
 				{
-					"name": "lastname",
+					"name": "lastName",
 					"type": {
-						"alexa": "AMAZON.US_LASTNAME_NAME",
+						"alexa": "AMAZON.US_LAST_NAME",
 						"dialogflow": "@sys.given-name"
 					}
 				}
