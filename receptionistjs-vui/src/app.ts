@@ -89,14 +89,14 @@ app.setHandler({
                     case 'appointment': {
                         this.tell(
                             'Great, I was able to find you in my notes. ' +
-                                foundEvent.contactperson +
+                                foundEvent.contactPerson +
                                 ' has been contacted and is on the way to welcome you'
                         );
                         break;
                     }
                     default: {
                         this.tell(
-                            'Great, I was able to find you in my notes. Your Event is held at ' +
+                            'Great, I was able to find you in my notes. Your event is held at ' +
                                 foundEvent.location
                         );
                     }
