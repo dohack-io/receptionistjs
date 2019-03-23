@@ -55,6 +55,7 @@ app.setHandler({
             speech.addBreak('1000ms').addText('To which of these events do you want to go?');
             // @ts-ignore
             this.ask(speech, 'Please tell me to which you want to go');
+            this.toIntent('EventIntent');
         },
 
         NoIntent() {
@@ -65,6 +66,8 @@ app.setHandler({
         const events = getEvents();
         let foundEvent = events.filter(value => value.name.includes(this.$inputs.eventName.value))[0];
         if (foundEvent) {
+
+            this.tell('Great, I was able to find you in my notes. ');
             if (validateAttendee(foundEvent.id)) {
                 this.tell('Great, I was able to find you in my notes. ');
             }
