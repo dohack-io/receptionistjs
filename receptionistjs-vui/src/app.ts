@@ -76,7 +76,6 @@ app.setHandler({
         )[0];
         if (foundEvent) {
 
-            this.tell('Great, I was able to find you in my notes. ');
             if (validateAttendee(foundEvent.id)) {
 
                 switch (foundEvent.type) {
