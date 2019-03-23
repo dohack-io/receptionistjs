@@ -26,6 +26,9 @@ export class EventService {
       .promise()
       .then(data => {
         Logger.log('Query succeeded.');
+        data.Items.forEach(item => {
+          delete item.attendees;
+        });
         return data.Items as EventModel[];
       })
       .catch(err => {
