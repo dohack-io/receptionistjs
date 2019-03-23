@@ -12,17 +12,17 @@ export class EventsPage implements OnInit {
   private events = [
     {
       'id': '123456789',
-      'name': 'Test Event',
+      'name': 'Test Event 1',
       'description': 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et'
     },
     {
       'id': '123456790',
-      'name': 'Test Event',
+      'name': 'Test Event 2',
       'description': 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et'
     },
     {
       'id': '123456791',
-      'name': 'Test Event',
+      'name': 'Test Event 3',
       'description': 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et'
     }
   ];
@@ -41,8 +41,13 @@ export class EventsPage implements OnInit {
   ngOnInit() {
   }
 
+
   onOpenEvent(eventId: number, eventName: string) {
     this.router.navigate(['registration'], { queryParams: { id: eventId, name: eventName } });
+  }
+
+  onOpenRegistratedUsers(eventId: number, eventName: string) {
+    this.router.navigate(['registrated-users'], { queryParams: { id: eventId} });
   }
 
 }

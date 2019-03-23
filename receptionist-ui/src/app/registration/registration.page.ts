@@ -8,17 +8,19 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class RegistrationPage implements OnInit {
 
-  constructor(    private route: ActivatedRoute,
-                  private router: Router) { }
+  eventId: number;
+  eventName: string;
+
+  constructor(private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit() {
-    const sub = this.route
-    .queryParams
-    .subscribe(params => {
-      // Defaults to 0 if no query param provided.
-      const page = +params['page'] || 0;
-    });
-    console.log(sub);
+    this.route.queryParams.subscribe(params => {
+      this.eventId = params['id'];
+      this.eventName = params['name'];
+
+      console.log(this.eventId);
+  });
   }
 
 

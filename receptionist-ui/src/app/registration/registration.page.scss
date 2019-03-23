@@ -1,0 +1,29 @@
+.side-title {
+    font-family: 'Pacifico', cursive;
+    font-size: 30px;
+    color: #00CED1;
+    text-align: center;
+    padding:20px;
+}
+
+.registrationTitle {
+    font-size:20px;
+    color: black;
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
+}
+
+
+ion-button{
+    --ion-color-primary: #00CED1;;
+    --ion-color-primary-contrast: white;
+    --ion-color-primary-shade: #009C9E;
+    --ion-color-primary-tint: white;
+}
+
+ion-button.button-disabled {
+    --background:var(--ion-color-primary); 
+    --color:var(--ion-color-primary-contrast); 
+    --opacity: 0.3;
+ }
