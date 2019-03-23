@@ -24,8 +24,6 @@ export class EventsController {
   public async  onCreateRegistration(@Param('id') id, @Body() registration: RegistrationModel) {
     const event = await this.eventService.readEvent(id);
     const attendees: RegistrationModel[] = event.attendees;
-    await this.eventService.updateRegistration(id, registration, attendees);
-    
-    return true;
+    return await this.eventService.updateRegistration(id, registration, attendees);
   }
 }
