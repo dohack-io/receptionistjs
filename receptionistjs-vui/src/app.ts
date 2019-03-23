@@ -27,11 +27,12 @@ app.setHandler({
 
     MyNameIsIntent() {
         this.$user.$data.firstName = this.$inputs.firstName.value;
+        this.$user.$data.lastName = this.$inputs.lastName.value;
         this.ask(
             'Hello ' +
-                this.$inputs.firstname.value +
+                this.$inputs.firstName.value +
                 ' ' +
-                this.$inputs.lastname.value +
+                this.$inputs.lastName.value +
                 '. What Event do you wish to attend?',
             'Please tell me the event you wish to attend'
         );
@@ -78,7 +79,7 @@ app.setHandler({
             event.name.includes(this.$inputs.eventName.value)
         )[0];
         if (foundEvent) {
-            if (await validateAttendee(foundEvent.id)) {
+            if (await validateAttendee.call(this, foundEvent.id)) {
                 switch (foundEvent.type) {
                     case 'conference': {
                         this.tell(
@@ -102,6 +103,12 @@ app.setHandler({
                         );
                     }
                 }
+            } else {
+                this.tell(
+                    'Sorry, I could not find you. I have contacted ' +
+                        foundEvent.contactPerson +
+                        ' to come here and help you.'
+                );
             }
         } else {
             let speech =
@@ -124,10 +131,9 @@ async function getEvents(): Promise<EventModel[]> {
 
 async function validateAttendee(eventID: string) {
     const options = {
-        uri: `http://localhost:5000/${eventID}/validate`,
+        uri: `http://localhost:5000/events/${eventID}/validate`,
         json: true,
         method: 'POST',
-        resolveWithFullResponse: true,
         body: {
             // @ts-ignore
             firstName: this.$user.$data.firstName,
@@ -135,11 +141,13 @@ async function validateAttendee(eventID: string) {
             lastName: this.$user.$data.lastName
         }
     };
-    const response = await requestPromise(options);
+    const response = await requestPromise(options).catch(() => {
+        return { isRegistered: false };
+    });
     console.log('-----------------');
     console.log(response);
     console.log('-----------------');
-    return response.statusCode === 200
+    return response.isRegistered === true;
 }
 
 module.exports.app = app;
