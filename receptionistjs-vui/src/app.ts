@@ -27,10 +27,10 @@ app.setHandler({
         this.$user.$data.firstName = this.$inputs.firstName.value;
         this.ask(
             'Hello ' +
-                this.$inputs.firstname.value +
-                ' ' +
-                this.$inputs.lastname.value +
-                '. What Event do you wish to attend?',
+            this.$inputs.firstname.value +
+            ' ' +
+            this.$inputs.lastname.value +
+            '. What Event do you wish to attend?',
             'Please tell me the event you wish to attend'
         );
     },
@@ -78,10 +78,22 @@ app.setHandler({
 
             this.tell('Great, I was able to find you in my notes. ');
             if (validateAttendee(foundEvent.id)) {
-                this.tell(
-                    'Great, I was able to find you in my notes. Your Event is held at ' +
-                        foundEvent.location
-                );
+
+                switch (foundEvent.type) {
+                    case 'conference': {
+                        this.tell(
+                            'Great, I was able to find you in my notes. Your conference is held at room ' +
+                            foundEvent.location
+                        );
+                        break;
+                    }
+                    default: {
+                        this.tell(
+                            'Great, I was able to find you in my notes. Your Event is held at ' +
+                            foundEvent.location
+                        );
+                    }
+                }
             }
         } else {
             let speech =
@@ -153,9 +165,9 @@ function validateAttendee(eventID: string) {
     return (
         mockAttendees.filter(attendee => {
             return (
-            // @ts-ignore
+                // @ts-ignore
                 attendee.firstName === this.$user.$data.firstName &&
-                  // @ts-ignore
+                // @ts-ignore
                 this.$user.$data.lastName
             );
         }).length > 0
