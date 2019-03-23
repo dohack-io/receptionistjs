@@ -58,6 +58,24 @@
 				"hello",
 				"hi"
 			]
+		},
+		{
+			"name": "EventIntent",
+			"phrases": [
+				"I want to attend {eventName}",
+				"I am here for {eventName}",
+				"{eventName}"
+			],
+			"inputs": [
+				{
+					"name": "eventName",
+					"type": {
+						"alexa": "AMAZON.SearchQuery",
+						"dialogflow": "@sys.any"
+					}
+
+				}
+			]
 		}
 	],
 	"alexa": {
