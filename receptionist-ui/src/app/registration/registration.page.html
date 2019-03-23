@@ -10,5 +10,54 @@
 </ion-header>
 
 <ion-content>
+<ion-title class="side-title">{{eventName}}</ion-title>
 
+<form #form="ngForm" (ngSubmit)="register(form)">
+  <ion-row justify-content-center>
+    <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+      <div text-center>
+        <p class="registrationTitle">Registriere dich jetzt!<p>
+      </div>
+    </ion-col>
+    <div padding>
+      <ion-item>
+        <ion-label size="5">Name:</ion-label>
+        <ion-input name="firstName" type="text" placeholder="Name" ngModel size="7" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Nachname:</ion-label>
+        <ion-input name="lastName" type="text" placeholder="Nachname" ngModel required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Mail:</ion-label>
+        <ion-input name="eMail" type="text" placeholder="E-Mail" ngModel required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Straße:</ion-label>
+        <ion-input name="street" type="text" placeholder="Straße" ngModel required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Postleitzahl:</ion-label>
+        <ion-input name="postCode" type="text" placeholder="Postleitzahl" ngModel required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Stadt:</ion-label>
+        <ion-input name="city" type="text" placeholder="Stadt" ngModel required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Geburtsdatum:</ion-label>
+        <ion-input name="birthDate" type="text" placeholder="Geburtsdatum" ngModel required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Telefonnummer:</ion-label>
+        <ion-input name="phoneNumber" type="text" placeholder="Telefonnummer" ngModel required></ion-input>
+      </ion-item>
+    </div>
+  </ion-row>
+    <div padding>
+      <ion-row  justify-content-center>
+          <ion-button class="register-button" size="large" type="submit" [disabled]="form.invalid" expand="block">Register</ion-button>   
+      </ion-row>
+    </div>
+</form>
 </ion-content>
