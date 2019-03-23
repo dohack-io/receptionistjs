@@ -22,6 +22,7 @@ app.use(new Alexa(), new GoogleAssistant(), new JovoDebugger(), new FileDb());
 
 app.setHandler({
     LAUNCH() {
+        this.$user.$data.failures = 0;
         this.toIntent('WelcomeIntent');
     },
 
@@ -30,9 +31,9 @@ app.setHandler({
         this.$user.$data.lastName = this.$inputs.lastName.value;
         this.ask(
             'Hello ' +
-                this.$inputs.firstName.value +
+                this.$inputs.firstname.value +
                 ' ' +
-                this.$inputs.lastName.value +
+                this.$inputs.lastname.value +
                 '. What Event do you wish to attend?',
             'Please tell me the event you wish to attend'
         );
@@ -111,12 +112,19 @@ app.setHandler({
                 );
             }
         } else {
-            let speech =
-                'Sorry, I could not find your Event. Do you want me to tell you, which Events are available?';
-            this.followUpState('EventState').ask(
-                speech,
-                'Please answer with yes or no.'
-            );
+            this.$user.$data.failures++;
+            if (this.$user.$data.failures <= 2) {
+                let speech =
+                    'Sorry, I could not find your Event. Do you want me to tell you, which Events are available?';
+                this.followUpState('EventState').ask(
+                    speech,
+                    'Please answer with yes or no.'
+                );
+            } else {
+                this.tell(
+                    "I'm sorry, I am not able to help you. A employee has been notified and will will take care of you."
+                );
+            }
         }
     }
 });

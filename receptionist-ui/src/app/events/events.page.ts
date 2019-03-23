@@ -16,7 +16,7 @@ export class EventsPage implements OnInit {
   }
 
   ngOnInit() {
-    this.http.get('http://localhost:3000/events').toPromise().then((value) => {
+    this.http.get('http://localhost:5000/events').toPromise().then((value) => {
       console.log(value);
       this.events = value;
     }).catch((err) => {
@@ -30,7 +30,7 @@ export class EventsPage implements OnInit {
   }
 
   onOpenRegistratedUsers(eventId: number, eventName: string) {
-    this.router.navigate(['registrated-users'], { queryParams: { id: eventId} });
+    this.router.navigate(['registrated-users'], { queryParams: { id: eventId, name: eventName } });
   }
 
 }

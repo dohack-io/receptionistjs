@@ -27,6 +27,14 @@ export class EventsController {
   public async  onCreateRegistration(@Param('id') id, @Body() attendee: RegistrationModel) {
     const event = await this.eventService.readEvent(id);
     const attendees: RegistrationModel[] = event.attendees;
+    const firstName: string = attendee.firstName.toLowerCase();
+    const lastName: string = attendee.lastName.toLowerCase();
+    const foundAttendee = attendees.find((existingAttendee) => {
+      return  existingAttendee.firstName.toLowerCase() === firstName && existingAttendee.lastName.toLowerCase() === lastName;
+    });
+    if (foundAttendee) {
+      throw new HttpException(`User ${firstName} ${lastName} is already registered`, HttpStatus.BAD_REQUEST);
+    }
     attendee.id = uniqid('attendee-');
     attendee.hasAttended = false;
     attendees.push(attendee);
@@ -39,8 +47,8 @@ export class EventsController {
     const attendees: RegistrationModel[] = event.attendees;
     const firstName: string = attendee.firstName.toLowerCase();
     const lastName: string = attendee.lastName.toLowerCase();
-    const foundAttendee = attendees.find((attendee) => {
-      return  attendee.firstName.toLowerCase() === firstName && attendee.lastName.toLowerCase() === lastName;
+    const foundAttendee = attendees.find((existingAttendee) => {
+      return  existingAttendee.firstName.toLowerCase() === firstName && existingAttendee.lastName.toLowerCase() === lastName;
     });
     if (!foundAttendee) {
       throw new HttpException(`User ${firstName} ${lastName} is not registered`, HttpStatus.PRECONDITION_FAILED);
