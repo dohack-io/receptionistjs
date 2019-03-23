@@ -7,6 +7,8 @@ import { Alexa } from 'jovo-platform-alexa';
 import { GoogleAssistant } from 'jovo-platform-googleassistant';
 import { JovoDebugger } from 'jovo-plugin-debugger';
 import { FileDb } from 'jovo-db-filedb';
+import { EventModel } from './EventModel';
+import { AttendeeModel } from './AttendeeModel';
 
 const requestPromise = require('request-promise-native');
 
@@ -43,8 +45,8 @@ app.setHandler({
     },
 
     EventState: {
-        YesIntent() {
-            const events = getEvents();
+        async YesIntent() {
+            const events = await getEvents();
             const eventNames = [];
             for (const event of events) {
                 eventNames.push(event.name);
@@ -69,15 +71,14 @@ app.setHandler({
             this.tell("Okay, I am sorry, that I could'nt help you");
         }
     },
-    EventIntent() {
-        const events = getEvents();
+    async EventIntent() {
+        const events = await getEvents();
         let foundEvent = events.filter(event =>
             event.name.includes(this.$inputs.eventName.value)
         )[0];
         if (foundEvent) {
-
             this.tell('Great, I was able to find you in my notes. ');
-            if (validateAttendee(foundEvent.id)) {
+            if (validateAttendee.call(this, foundEvent.id)) {
                 this.tell(
                     'Great, I was able to find you in my notes. Your Event is held at ' +
                         foundEvent.location
@@ -94,34 +95,15 @@ app.setHandler({
     }
 });
 
-function getEvents() {
-    /*const options = {
-        uri: 'http://localhost/events',
+async function getEvents(): Promise<EventModel[]> {
+    const options = {
+        uri: 'http://localhost:5000/events',
         json: true
     };
-    const data = await requestPromise(options);
-    console.log(data);*/
-    const mockEvents = [
-        {
-            id: '1',
-            name: 'DOHACKJS',
-            type: 'conference',
-            location: 'Untergeschoss',
-            description:
-                'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et'
-        },
-        {
-            id: '5',
-            name: 'Wrestlecon',
-            type: 'conference',
-            location: 'Große Halle',
-            description: 'A Super Convention for Wrestling'
-        }
-    ];
-    return mockEvents;
+    return await requestPromise(options);
 }
 
-function validateAttendee(eventID: string) {
+async function validateAttendee(eventID: string) {
     const mockAttendees = [
         {
             id: '3242394235',
@@ -148,18 +130,19 @@ function validateAttendee(eventID: string) {
             hasAttended: false
         }
     ];
-
-    // @ts-ignore
-    return (
-        mockAttendees.filter(attendee => {
-            return (
+    const options = {
+        uri: `http://localhost:5000/events/${eventID}/registrations`,
+        json: true
+    };
+    const attendees: AttendeeModel[] = await requestPromise(options);
+    return attendees.filter(attendee => {
+        return (
             // @ts-ignore
-                attendee.firstName === this.$user.$data.firstName &&
-                  // @ts-ignore
-                this.$user.$data.lastName
-            );
-        }).length > 0
-    );
+            attendee.firstName === this.$user.$data.firstName &&
+            // @ts-ignore
+            attendee.lastName === this.$user.$data.lastName
+        );
+    });
 }
 
 module.exports.app = app;
