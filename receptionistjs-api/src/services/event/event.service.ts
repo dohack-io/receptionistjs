@@ -111,8 +111,9 @@ export class EventService {
     return await this.docClient
       .update(params)
       .promise()
-      .then((err, data) => {
+      .then((data) => {
         Logger.log('UpdateItem succeeded:', JSON.stringify(data, null, 2));
+        return data;
       })
       .catch(err => {
         Logger.error(
