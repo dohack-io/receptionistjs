@@ -1,5 +1,5 @@
 export interface RegistrationModel {
-    id: string,
+    id?: string,
     firstName: string,
     lastName: string,
     eMail: string,
