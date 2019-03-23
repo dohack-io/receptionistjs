@@ -1,5 +1,5 @@
 {
-	"invocation": "my test app",
+	"invocation": "ReceptionistJS",
 	"intents": [
 		{
 			"name": "HelloWorldIntent",
@@ -25,6 +25,13 @@
 						"dialogflow": "@sys.given-name"
 					}
 				}
+			]
+		},
+		{
+			"name": "WelcomeIntent",
+			"phrases": [
+				"hello",
+				"hi"
 			]
 		}
 	],
