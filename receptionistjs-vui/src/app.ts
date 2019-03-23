@@ -77,12 +77,30 @@ app.setHandler({
             event.name.includes(this.$inputs.eventName.value)
         )[0];
         if (foundEvent) {
-            this.tell('Great, I was able to find you in my notes. ');
-            if (validateAttendee.call(this, foundEvent.id)) {
-                this.tell(
-                    'Great, I was able to find you in my notes. Your Event is held at ' +
-                        foundEvent.location
-                );
+            if (validateAttendee(foundEvent.id)) {
+                switch (foundEvent.type) {
+                    case 'conference': {
+                        this.tell(
+                            'Great, I was able to find you in my notes. Your conference is held at room ' +
+                                foundEvent.location
+                        );
+                        break;
+                    }
+                    case 'appointment': {
+                        this.tell(
+                            'Great, I was able to find you in my notes. ' +
+                                foundEvent.contactperson +
+                                ' has been contacted and is on the way to welcome you'
+                        );
+                        break;
+                    }
+                    default: {
+                        this.tell(
+                            'Great, I was able to find you in my notes. Your Event is held at ' +
+                                foundEvent.location
+                        );
+                    }
+                }
             }
         } else {
             let speech =
@@ -104,32 +122,6 @@ async function getEvents(): Promise<EventModel[]> {
 }
 
 async function validateAttendee(eventID: string) {
-    const mockAttendees = [
-        {
-            id: '3242394235',
-            firstName: 'Nils',
-            lastName: 'Fenzl',
-            eMail: 'nils.fenzl@sparqs.io',
-            street: 'Brotkrümelallee 13',
-            postCode: '99999',
-            city: 'Musterstadt',
-            birthDate: '01.01.1985',
-            phoneNumber: '0123456789',
-            hasAttended: false
-        },
-        {
-            id: '5',
-            firstName: 'Frederik',
-            lastName: 'Hoffmann',
-            eMail: 'frederik.hoffmann@sparqs.io',
-            street: 'Spanischer Weg 45',
-            postCode: '66666',
-            city: 'Musterstadt',
-            birthDate: '01.01.1985',
-            phoneNumber: '01523773752468',
-            hasAttended: false
-        }
-    ];
     const options = {
         uri: `http://localhost:5000/events/${eventID}/registrations`,
         json: true

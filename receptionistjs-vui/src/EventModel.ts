@@ -4,4 +4,5 @@ export interface EventModel {
     type: string;
     location: string;
     description: string;
+    contactperson: string;
 }

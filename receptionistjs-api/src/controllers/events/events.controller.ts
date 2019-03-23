@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Header, Param } from '@nestjs/common';
+import { Controller, Post, Body, Get, Header, Param, Options } from '@nestjs/common';
 import { EventService } from '../../services/event/event.service';
 import { EventModel } from '../../shared/event.model';
 import { RegistrationModel } from 'src/shared/registration.model';
@@ -20,7 +20,6 @@ export class EventsController {
   }
 
   @Post(':id/register')
-  @Header('Access-Control-Allow-Origin', '*')
   public async  onCreateRegistration(@Param('id') id, @Body() registration: RegistrationModel) {
     const event = await this.eventService.readEvent(id);
     const attendees: RegistrationModel[] = event.attendees;
