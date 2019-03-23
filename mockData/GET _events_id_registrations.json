@@ -1,0 +1,26 @@
+[
+  {
+    "id": "3242394235",
+    "firstName": "Nils",
+    "lastName": "Fenzl",
+    "eMail": "nils.fenzl@sparqs.io",
+    "street": "Brotkrümelallee 13",
+    "postCode": "99999",
+    "city": "Musterstadt",
+    "birthDate": "01.01.1985",
+    "phoneNumber": "0123456789",
+    "hasAttended": false
+  },
+  {
+    "id": "5",
+    "firstName": "Frederik",
+    "lastName": "Hoffmann",
+    "eMail": "frederik.hoffmann@sparqs.io",
+    "street": "Spanischer Weg 45",
+    "postCode": "66666",
+    "city": "Musterstadt",
+    "birthDate": "01.01.1985",
+    "phoneNumber": "01523773752468",
+    "hasAttended": false
+  }
+]

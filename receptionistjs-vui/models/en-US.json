@@ -58,6 +58,23 @@
 
 				}
 			]
+		},
+		{
+			"name": "YesIntent",
+			"phrases": [
+				"Yes",
+				"yeah",
+				"yup",
+				"positive"
+			]
+		},
+		{
+			"name": "NoIntent",
+			"phrases": [
+				"no",
+				"negative",
+				"nope"
+			]
 		}
 	],
 	"alexa": {
