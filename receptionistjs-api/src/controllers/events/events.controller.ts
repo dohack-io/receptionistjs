@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Header, Param, Options, HttpException, HttpStatus } from '@nestjs/common';
+import { Controller, Post, Body, Get, Header, Param, Options, HttpException, HttpStatus, Put } from '@nestjs/common';
 import { EventService } from '../../services/event/event.service';
 import { EventModel } from '../../shared/event.model';
 import { RegistrationModel } from 'src/shared/registration.model';
@@ -21,6 +21,12 @@ export class EventsController {
   @Get(':id')
   public onReadRegistrations(@Param('id') id) {
     return this.eventService.readEvent(id);
+  }
+
+  @Put()
+  public async onUpdateEvent(@Body() event: EventModel) {
+    const readEvent = await this.eventService.readEvent(event.id);
+    return await this.eventService.updateEvent(event, readEvent.attendees);
   }
 
   @Post(':id/register')

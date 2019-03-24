@@ -62,7 +62,7 @@ export class EventService {
 
   public async createEvent(event: EventModel) {
     const item: EventModel = {
-      id: uniqid('event-'),
+      id: event.id || uniqid('event-'),
       name: event.name,
       type: event.type,
       description: event.description,
@@ -109,7 +109,7 @@ export class EventService {
     return await this.docClient
       .update(params)
       .promise()
-      .then((data) => {
+      .then(data => {
         Logger.log('UpdateItem succeeded:', JSON.stringify(data, null, 2));
         return {
           isRegistered: true,
@@ -118,6 +118,38 @@ export class EventService {
       .catch(err => {
         Logger.error(
           'Unable to update item. Error JSON:',
+          JSON.stringify(err, null, 2),
+        );
+      });
+  }
+
+  public async updateEvent(
+    event: EventModel,
+    attendees: RegistrationModel[],
+  ) {
+    await this.deleteEvent(event);
+    event.attendees = attendees;
+    await this.createEvent(event);
+  }
+
+  public async deleteEvent(event: EventModel) {
+    const params = {
+      TableName: this.table,
+      Key: {
+        id: event.id,
+      },
+    };
+
+    Logger.log('Attempting a conditional delete...');
+    this.docClient
+      .delete(params)
+      .promise()
+      .then(data => {
+        Logger.log('DeleteItem succeeded:', JSON.stringify(data, null, 2));
+      })
+      .catch(err => {
+        Logger.error(
+          'Unable to delete item. Error JSON:',
           JSON.stringify(err, null, 2),
         );
       });
