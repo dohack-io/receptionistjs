@@ -1,0 +1,112 @@
+{
+	"invocation": "receptionist",
+	"intents": [
+		{
+			"name": "HelloWorldIntent",
+			"phrases": [
+				"hello",
+				"say hello",
+				"say hello world"
+			]
+		},
+		{
+			"name": "MyNameIsIntent",
+			"phrases": [
+				"Mein Name ist {personName}",
+				"Ich bin {personName}",
+				"Du kannst mich {personName} nennen"
+			],
+			"inputs": [
+				{
+					"name": "personName",
+					"type": {
+						"alexa": "AMAZON.Person",
+						"dialogflow": "@sys.given-name"
+					}
+				}
+			]
+		},
+		{
+			"name": "WelcomeIntent",
+			"phrases": [
+				"Hallo",
+				"Hi"
+			]
+		},
+		{
+			"name": "EventIntent",
+			"phrases": [
+				"Ich möchte an {eventName} teilnehmen",
+				"Ich bin hier für {eventName}",
+				"Ich wünsche an {eventName} teilzunehmen"
+			],
+			"inputs": [
+				{
+					"name": "eventName",
+					"type": {
+						"alexa": "AMAZON.SearchQuery",
+						"dialogflow": "@sys.any"
+					}
+
+				}
+			]
+		},
+		{
+			"name": "YesIntent",
+			"phrases": [
+				"Ja",
+				"Yeah",
+				"Jup",
+				"positiv"
+			]
+		},
+		{
+			"name": "NoIntent",
+			"phrases": [
+				"Nein",
+				"negativ",
+				"nope"
+			]
+		}
+	],
+	"alexa": {
+		"interactionModel": {
+			"languageModel": {
+				"intents": [
+					{
+						"name": "AMAZON.CancelIntent",
+						"samples": []
+					},
+					{
+						"name": "AMAZON.HelpIntent",
+						"samples": []
+					},
+					{
+						"name": "AMAZON.StopIntent",
+						"samples": []
+					}
+				]
+			}
+		}
+	},
+	"dialogflow": {
+		"intents": [
+			{
+				"name": "Default Fallback Intent",
+				"auto": true,
+				"webhookUsed": true,
+				"fallbackIntent": true
+			},
+			{
+				"name": "Default Welcome Intent",
+				"auto": true,
+				"webhookUsed": true,
+				"events": [
+					{
+						"name": "WELCOME"
+					}
+				]
+			}
+		]
+	}
+}
