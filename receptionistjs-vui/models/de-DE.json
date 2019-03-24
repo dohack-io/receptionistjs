@@ -12,9 +12,9 @@
 		{
 			"name": "MyNameIsIntent",
 			"phrases": [
-				"my name is {personName}",
-				"i am {personName}",
-				"you can call me {personName}"
+				"Mein Name ist {personName}",
+				"Ich bin {personName}",
+				"Du kannst mich {personName} nennen"
 			],
 			"inputs": [
 				{
@@ -29,16 +29,16 @@
 		{
 			"name": "WelcomeIntent",
 			"phrases": [
-				"hello",
-				"hi"
+				"Hallo",
+				"Hi"
 			]
 		},
 		{
 			"name": "EventIntent",
 			"phrases": [
-				"I want to attend {eventName}",
-				"I am here for {eventName}",
-				"I wish to attend {eventName}"
+				"Ich möchte an {eventName} teilnehmen",
+				"Ich bin hier für {eventName}",
+				"Ich wünsche an {eventName} teilzunehmen"
 			],
 			"inputs": [
 				{
@@ -54,17 +54,17 @@
 		{
 			"name": "YesIntent",
 			"phrases": [
-				"Yes",
-				"yeah",
-				"yup",
-				"positive"
+				"Ja",
+				"Yeah",
+				"Jup",
+				"positiv"
 			]
 		},
 		{
 			"name": "NoIntent",
 			"phrases": [
-				"no",
-				"negative",
+				"Nein",
+				"negativ",
 				"nope"
 			]
 		}
