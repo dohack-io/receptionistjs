@@ -16,6 +16,7 @@
       <div class="card-subtitle">{{ event.description }}
     </div>
     <div class="eventButtons">
+      <ion-button large color="secondary" (click)="onEditEvent(event.id)">Bearbeiten</ion-button>
     <ion-button large color="secondary" (click)="onOpenEvent(event.id, event.name)">
       Registrieren
     </ion-button>

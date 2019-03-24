@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{event.name}} - Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-title class="side-title">{{event.name}}</ion-title>
+  <form #form="ngForm" (ngSubmit)="saveDetails(form)">
+    <ion-row justify-content-center>
+      <div padding>
+        <ion-item>
+          <ion-label size="5">Name: </ion-label>
+          <ion-input
+            name="name"
+            type="text"
+            placeholder="Name"
+            ngModel
+            size="7"
+            [value]="event.name"
+            required
+          >
+          </ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Typ: </ion-label>
+          <ion-input
+            name="type"
+            type="text"
+            placeholder="Typ"
+            ngModel
+            required
+            [value]="event.type"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Ort: </ion-label>
+          <ion-input
+            name="location"
+            type="text"
+            placeholder="Ort"
+            ngModel
+            required
+            [value]="event.location"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Beschreibung: </ion-label>
+          <ion-input
+            name="description"
+            type="text"
+            placeholder="Beschreibung"
+            ngModel
+            required
+            [value]="event.description"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Kontaktperson: </ion-label>
+          <ion-input
+            name="contactPerson"
+            type="text"
+            placeholder="Kontaktperson"
+            ngModel
+            required
+            [value]="event.contactPerson"
+          ></ion-input>
+        </ion-item>
+      </div>
+    </ion-row>
+    <div padding>
+      <ion-row justify-content-center>
+        <ion-button
+          class="save-button"
+          size="large"
+          type="submit"
+          expand="block"
+          >Speichern</ion-button
+        >
+      </ion-row>
+    </div>
+  </form>
+</ion-content>

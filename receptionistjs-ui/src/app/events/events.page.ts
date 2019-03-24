@@ -48,4 +48,10 @@ export class EventsPage implements OnInit {
       queryParams: { id: eventId, name: eventName }
     });
   }
+
+  onEditEvent(eventId: number) {
+    this.router.navigate(['event-detail'], {
+      queryParams: { id: eventId}
+    })
+  }
 }
