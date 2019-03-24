@@ -61,7 +61,7 @@ export class EventDetailPage implements OnInit {
     };
 
     this.http
-      .put("http://localhost:5000/events", data)
+      .post("http://localhost:5000/events", data)
       .toPromise()
       .then(value => {
         this.event = data;
