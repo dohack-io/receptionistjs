@@ -35,7 +35,7 @@ app.setHandler({
                 ' ' +
                 name[1] +
                 '. Bei welchem Event möchten Sie teilnehmen?',
-            'Bitte nennen mir die Veranstaltung, an welche Sie teilnehmen möchten'
+            'Bitte nennen mir die Veranstaltung, an welcher Sie teilnehmen möchten'
         );
     },
 
@@ -75,7 +75,7 @@ app.setHandler({
             // @ts-ignore
             speech
                 .addBreak('1000ms')
-                .addText('An welchen von diesen Elementen wollen Sie teilnehmen?');
+                .addText('An welchen von diesen Veranstaltungen wollen Sie teilnehmen?');
             // @ts-ignore
             this.ask(speech, 'Bitte sagen Sie mir zu welcher Veranstaltung Sie gehen wollen');
             this.toIntent('EventIntent');
