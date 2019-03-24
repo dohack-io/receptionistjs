@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-title class="side-title">{{event.name}}</ion-title>
+  <ion-title class="side-title">Edit {{event.name}}</ion-title>
   <form #form="ngForm" (ngSubmit)="saveDetails(form)">
     <ion-row justify-content-center>
       <div padding>
@@ -23,15 +23,11 @@
           </ion-input>
         </ion-item>
         <ion-item>
-          <ion-label>Typ: </ion-label>
-          <ion-input
-            name="type"
-            type="text"
-            placeholder="Typ"
-            ngModel
-            required
-            [value]="event.type"
-          ></ion-input>
+          <ion-label>Type:</ion-label>
+          <ion-select name="type"  placeholder="Select one type of the event" (ionChange)="onChange($event)">
+            <ion-select-option value="conference">Conference</ion-select-option>
+            <ion-select-option value="appointment">Appointment</ion-select-option>
+          </ion-select>
         </ion-item>
         <ion-item>
           <ion-label>Ort: </ion-label>
