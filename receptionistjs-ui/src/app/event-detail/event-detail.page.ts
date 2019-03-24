@@ -9,6 +9,7 @@ import { AlertController, LoadingController } from "@ionic/angular";
   styleUrls: ["./event-detail.page.scss"]
 })
 export class EventDetailPage implements OnInit {
+  private selectedEventType = '';
   event: {
     id: string;
     name?: string;
@@ -16,6 +17,7 @@ export class EventDetailPage implements OnInit {
     location?: string;
     description?: string;
     contactPerson?: string;
+    attendees?: Array<any>;
   };
 
   constructor(
@@ -37,8 +39,8 @@ export class EventDetailPage implements OnInit {
     this.http
       .get(`http://localhost:5000/events/${this.event.id}`)
       .toPromise<any>()
-      .then((value) => {
-        this.event = value
+      .then(value => {
+        this.event = value;
       });
   }
 
@@ -51,15 +53,37 @@ export class EventDetailPage implements OnInit {
     const data = {
       id: this.event.id,
       name: form.form.controls.name.value,
-      type: form.form.controls.type.value,
+      type: this.selectedEventType,
       location: form.form.controls.location.value,
       description: form.form.controls.description.value,
-      contactPerson: form.form.controls.contactPerson.value
+      contactPerson: form.form.controls.contactPerson.value,
+      attendees: this.event.attendees
     };
 
-    this.http.put('http://localhost:5000/events', data).toPromise().then(value => {
-      this.event = data
-    });
+    this.http
+      .put("http://localhost:5000/events", data)
+      .toPromise()
+      .then(value => {
+        this.event = data;
+        this.onAlert("Änderungen erfolgreich gespeichert");
+      })
+      .catch(err => {
+        console.log(err);
+        this.onAlert("Es trat ein Fehler auf");
+      });
     await loader.dismiss();
+  }
+
+  async onAlert(message: string) {
+    const alert = await this.alertCtrl.create({
+      message: message,
+      buttons: ["OK"]
+    });
+
+    alert.present();
+  }
+
+  public onChange($event) {
+    this.selectedEventType = $event.detail.value;
   }
 }
