@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      New Event
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-title class="side-title">Add new event</ion-title>
+  <div text-center>
+    <p class="registrationTitle">As admin you can add a new event<p>
+  </div>
+  <form #form="ngForm" (ngSubmit)="create(form)">
+    <ion-row justify-content-center>
+      <div padding>
+        <ion-item>
+          <ion-label size="5">Event name:</ion-label>
+          <ion-input name="name" type="text" placeholder="Name of the event" ngModel required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Event description:</ion-label>
+          <ion-input name="description" type="text" placeholder="Short description of the event" ngModel required>
+          </ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Location:</ion-label>
+          <ion-input name="location" type="text" placeholder="Location of the event" ngModel required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Type:</ion-label>
+          <ion-select name="type"  placeholder="Select one type of the event" (ionChange)="onChange($event)">
+            <ion-select-option value="conference">Conference</ion-select-option>
+            <ion-select-option value="appointment">Appointment</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>Contact person:</ion-label>
+          <ion-input name="contactPerson" type="text" placeholder="Contact person of the event" ngModel required></ion-input>
+        </ion-item>
+      </div>
+    </ion-row>
+    <div padding>
+      <ion-row justify-content-center>
+        <ion-button class="create-button" size="large" type="submit" [disabled]="form.invalid" expand="block">Create
+        </ion-button>
+      </ion-row>
+    </div>
+  </form>
+</ion-content>
