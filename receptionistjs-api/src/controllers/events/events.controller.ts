@@ -1,4 +1,15 @@
-import { Controller, Post, Body, Get, Header, Param, Options, HttpException, HttpStatus, Put } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  Header,
+  Param,
+  Options,
+  HttpException,
+  HttpStatus,
+  Put,
+} from '@nestjs/common';
 import { EventService } from '../../services/event/event.service';
 import { EventModel } from '../../shared/event.model';
 import { RegistrationModel } from 'src/shared/registration.model';
@@ -26,20 +37,32 @@ export class EventsController {
   @Put()
   public async onUpdateEvent(@Body() event: EventModel) {
     const readEvent = await this.eventService.readEvent(event.id);
+    if (readEvent) {
+      event.attendees = readEvent;
+    }
     return await this.eventService.updateEvent(event, readEvent.attendees);
   }
 
   @Post(':id/register')
-  public async  onCreateRegistration(@Param('id') id, @Body() attendee: RegistrationModel) {
+  public async onCreateRegistration(
+    @Param('id') id,
+    @Body() attendee: RegistrationModel,
+  ) {
     const event = await this.eventService.readEvent(id);
     const attendees: RegistrationModel[] = event.attendees;
     const firstName: string = attendee.firstName.toLowerCase();
     const lastName: string = attendee.lastName.toLowerCase();
-    const foundAttendee = attendees.find((existingAttendee) => {
-      return  existingAttendee.firstName.toLowerCase() === firstName && existingAttendee.lastName.toLowerCase() === lastName;
+    const foundAttendee = attendees.find(existingAttendee => {
+      return (
+        existingAttendee.firstName.toLowerCase() === firstName &&
+        existingAttendee.lastName.toLowerCase() === lastName
+      );
     });
     if (foundAttendee) {
-      throw new HttpException(`User ${firstName} ${lastName} is already registered`, HttpStatus.BAD_REQUEST);
+      throw new HttpException(
+        `User ${firstName} ${lastName} is already registered`,
+        HttpStatus.BAD_REQUEST,
+      );
     }
     attendee.id = uniqid('attendee-');
     attendee.hasAttended = false;
@@ -48,20 +71,32 @@ export class EventsController {
   }
 
   @Post(':eventId/validate')
-  public async  onConfirmRegistration(@Param('eventId') eventId, @Body() attendee: RegistrationModel) {
+  public async onConfirmRegistration(
+    @Param('eventId') eventId,
+    @Body() attendee: RegistrationModel,
+  ) {
     const event = await this.eventService.readEvent(eventId);
     const attendees: RegistrationModel[] = event.attendees;
     const firstName: string = attendee.firstName.toLowerCase();
     const lastName: string = attendee.lastName.toLowerCase();
-    const foundAttendee = attendees.find((existingAttendee) => {
-      return  existingAttendee.firstName.toLowerCase() === firstName && existingAttendee.lastName.toLowerCase() === lastName;
+    const foundAttendee = attendees.find(existingAttendee => {
+      return (
+        existingAttendee.firstName.toLowerCase() === firstName &&
+        existingAttendee.lastName.toLowerCase() === lastName
+      );
     });
     if (!foundAttendee) {
-      throw new HttpException(`User ${firstName} ${lastName} is not registered`, HttpStatus.PRECONDITION_FAILED);
+      throw new HttpException(
+        `User ${firstName} ${lastName} is not registered`,
+        HttpStatus.PRECONDITION_FAILED,
+      );
     }
     foundAttendee.hasAttended = true;
 
-    return await this.eventService.updateRegistration(eventId, attendee, attendees);
+    return await this.eventService.updateRegistration(
+      eventId,
+      attendee,
+      attendees,
+    );
   }
-
 }
