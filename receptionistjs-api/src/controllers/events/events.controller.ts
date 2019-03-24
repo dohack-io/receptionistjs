@@ -38,9 +38,9 @@ export class EventsController {
   public async onUpdateEvent(@Body() event: EventModel) {
     const readEvent = await this.eventService.readEvent(event.id);
     if (readEvent) {
-      event.attendees = readEvent;
+      event.attendees = readEvent.attendees;
     }
-    return await this.eventService.updateEvent(event, readEvent.attendees);
+    return await this.eventService.updateEvent(event, event.attendees);
   }
 
   @Post(':id/register')
