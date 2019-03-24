@@ -30,19 +30,19 @@ app.setHandler({
         this.$user.$data.firstName = name[0];
         this.$user.$data.lastName = name[1];
         this.ask(
-            'Hello ' +
+            'Hallo ' +
                 name[0] +
                 ' ' +
                 name[1] +
-                '. What Event do you wish to attend?',
-            'Please tell me the event you wish to attend'
+                '. Bei welchem Event möchten Sie teilnehmen?',
+            'Bitte nennen mir die Veranstaltung, an welche Sie teilnehmen möchten'
         );
     },
 
     WelcomeIntent() {
         let speech =
-            "Welcome, I am your receptionist for today. What's your name?";
-        let reprompt = 'Please tell me your name?';
+            "Willkommen, ich bin Ihr heutiger Rezeptionist. Wie heißen Sie?";
+        let reprompt = 'Bitte sagen Sie mir Ihren Namen';
         this.ask(speech, reprompt);
     },
 
@@ -56,7 +56,7 @@ app.setHandler({
             // @ts-ignore
             let speech = this.speechBuilder();
             // @ts-ignore
-            speech.addText('The currently available events are: ');
+            speech.addText('Die aktuell verfügbaren Veranstaltungen sind: ');
             for (let i = 0; i < eventNames.length; i++) {
                 // @ts-ignore
                 speech.addText(eventNames[i]);
@@ -75,14 +75,14 @@ app.setHandler({
             // @ts-ignore
             speech
                 .addBreak('1000ms')
-                .addText('To which of these events do you want to go?');
+                .addText('An welchen von diesen Elementen wollen Sie teilnehmen?');
             // @ts-ignore
-            this.ask(speech, 'Please tell me to which you want to go');
+            this.ask(speech, 'Bitte sagen Sie mir zu welcher Veranstaltung Sie gehen wollen');
             this.toIntent('EventIntent');
         },
 
         NoIntent() {
-            this.tell("Okay, I am sorry, that I could'nt help you");
+            this.tell("Bitte entschuldigen Sie. Ich kann Ihnen nicht helfen");
         }
     },
 
@@ -99,45 +99,45 @@ app.setHandler({
                 switch (foundEvent.type) {
                     case 'conference': {
                         this.tell(
-                            'Great, I was able to find you in my notes. Your conference is held at room ' +
-                                foundEvent.location
+                            'Super, ich habe Sie in meinen Unterlagen gefunden. Ihre Konferenz findet im Raum ' +
+                                foundEvent.location + ' statt.'
                         );
                         break;
                     }
                     case 'appointment': {
                         this.tell(
-                            'Great, I was able to find you in my notes. ' +
+                            'Super, ich habe Sie in meinen Unterlagen gefunden. ' +
                                 foundEvent.contactPerson +
-                                ' has been contacted and is on the way to welcome you'
+                                ' wurde soeben benachrichtigt und wird Sie in Kürze Willkommen heißen.'
                         );
                         break;
                     }
                     default: {
                         this.tell(
-                            'Great, I was able to find you in my notes. Your event is held at ' +
-                                foundEvent.location
+                            'Super, ich habe Sie in meinen Unterlagen gefunden. Ihre Veranstaltung findet im Raum ' +
+                                foundEvent.location + ' statt'
                         );
                     }
                 }
             } else {
                 this.tell(
-                    'Sorry, I could not find you. I have contacted ' +
+                    'Entschuldigen Sie, ich konnte Sie in meinen Unterlagen nicht finden. Ich habe soeben ' +
                         foundEvent.contactPerson +
-                        ' to come here and help you.'
+                        ' benachrichtigt, welcher Sie in Kürze im Empfang nehmen wird.'
                 );
             }
         } else {
             this.$user.$data.failures++;
             if (this.$user.$data.failures <= 2) {
                 let speech =
-                    'Sorry, I could not find your Event. Do you want me to tell you, which Events are available?';
+                    'Entschuldigen Sie, ich konnte Ihre Veranstaltung nicht finden. Möchten Sie eine Auflistung aller kommenden Veranstaltung ausgegeben bekommen?';
                 this.followUpState('EventState').ask(
                     speech,
-                    'Please answer with yes or no.'
+                    'Bitte antworten Sie mit Ja oder Nein.'
                 );
             } else {
                 this.tell(
-                    "I'm sorry, I am not able to help you. A employee has been notified and will will take care of you."
+                    "Entschuldigen Sie, ich glaube ich kann Ihnen nicht helfen. Ein Mitarbeiter wurde soeben benachrichtigt und wird sich in Kürze um Ihr Anliegen kümmern."
                 );
             }
         }
