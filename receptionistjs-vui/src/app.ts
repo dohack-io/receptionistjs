@@ -55,9 +55,21 @@ app.setHandler({
             }
             // @ts-ignore
             let speech = this.speechBuilder();
-            for (const eventName of eventNames) {
+            // @ts-ignore
+            speech.addText('The currently available events are: ');
+            for (let i = 0; i < eventNames.length; i++) {
                 // @ts-ignore
-                speech.addText(eventName + ', ');
+                speech.addText(eventNames[i]);
+                if (i == eventNames.length - 2) {
+                    // @ts-ignore
+                    speech.addText(' and ');
+                } else if (i == eventNames.length - 1) {
+                    // @ts-ignore
+                    speech.addText('. ');
+                } else {
+                    // @ts-ignore
+                    speech.addText(', ');
+                }
             }
 
             // @ts-ignore

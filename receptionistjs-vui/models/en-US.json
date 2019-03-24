@@ -37,7 +37,8 @@
 			"name": "EventIntent",
 			"phrases": [
 				"I want to attend {eventName}",
-				"I am here for {eventName}"
+				"I am here for {eventName}",
+				"I wish to attend {eventName}"
 			],
 			"inputs": [
 				{
